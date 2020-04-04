@@ -1,3 +1,22 @@
 h1, p {
   font-family: Lato;
 }
+
+.card {
+  font-family: Roboto;
+  color: white;
+  background-color:rgb(27, 27, 46);
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 8px;
+  width:150px;
+  height:200px;
+}
+
+.card:hover {
+  background-color:rgb(53, 53, 107);
+}
+
+.cardgrid {
+  display: inline-flex;
+}

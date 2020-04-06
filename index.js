@@ -1,26 +1,52 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Hello from './Hello';
-import Card from './Card';
+import TimeCard from './TimeCard';
+import moment from 'moment';
 import './style.css';
+require('moment/locale/es');
+
+let time = new Date().toLocaleString();
+
+//gettime();
+function gettime(){
+  fetch('https://dog.ceo/api/breeds/list/all')
+        .then(response => response.json())
+        //.then(data => {this.setState({date:data.message.buhund})})
+        .then(data => {
+          this.setState({date:'holamundo'})
+        })
+  fetch('https://worldtimeapi.org/api/ip/188.127.181.241')
+    .then(response => response.json())
+    //.then(data => {this.setState({date:date.datetime})})
+};
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      name: 'Fran'
+      name: 'Fran',
+      date: [],
+      time: []
     };
+  }
+
+  componentDidMount(){
+    fetch('https://worldtimeapi.org/api/ip/188.127.181.241')
+    .then(response => response.json())
+    .then(data => {
+      moment.locale("es");
+      this.setState({time:moment(data.datetime).format('LT')});
+      this.setState({date:moment(data.datetime).format('LL')});
+    })
   }
 
   render() {
     return (
       <div>
         <Hello name={this.state.name} />
-        <div class="cardgrid">
-          <Card city="Paris" time="23:19" date="sábado, 4 de abril de 2020 (CEST)" />
-          <Card city="Madrid" time="23:19" date="sábado, 4 de abril de 2020 (CEST)" />
-          <Card city="Rome" time="23:19" date="sábado, 4 de abril de 2020 (CEST)" />
-          <Card city="New York" time="23:19" date="sábado, 4 de abril de 2020 (CEST)" />
+        <div className="cardgrid">
+          <TimeCard city="Home" time={this.state.time} date={this.state.date} />
         </div>
       </div>
     );

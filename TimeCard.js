@@ -1,8 +1,8 @@
 import React from 'react';
 
 export default ({ city, time, date }) => 
-  <div class="card">
+  <div className="card">
     <h2>{city}</h2>
-    <p>{time}</p>
+    <h3>{time}</h3>
     <p>{date}</p>
   </div>;
